@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import type { Page } from '../types';
 
 const PlayIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -13,7 +14,11 @@ const InfoIcon = () => (
   </svg>
 );
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  navigateTo: (page: Page) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
   return (
     <div className="relative h-screen w-full">
       {/* Background Video */}
@@ -48,7 +53,7 @@ const Hero: React.FC = () => {
             <Button onClick={() => {}} variant="primary" icon={<PlayIcon />}>
               Mulai Nonton
             </Button>
-            <Button onClick={() => {}} variant="secondary" icon={<InfoIcon />}>
+            <Button onClick={() => navigateTo('blog')} variant="secondary" icon={<InfoIcon />}>
               Info Lebih
             </Button>
           </div>

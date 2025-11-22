@@ -49,13 +49,14 @@ const Header: React.FC<HeaderProps> = ({ navigateTo }) => {
     }
   }, [isMenuOpen]);
 
-  const navLinks = ["Home", "Series", "Tentang", "Berlangganan"];
+  const navLinks = ["Home", "Series", "Blog", "Tentang", "Berlangganan"];
   
   const handleNavClick = (e: React.MouseEvent, link: string) => {
     e.preventDefault();
     const pageMap: { [key: string]: Page } = {
       'Home': 'home',
       'Series': 'series',
+      'Blog': 'blog',
       'Tentang': 'tentang',
       'Berlangganan': 'berlangganan'
     };

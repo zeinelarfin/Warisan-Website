@@ -5,6 +5,7 @@ import DetailPage from './pages/DetailPage';
 import TentangPage from './pages/TentangPage';
 import SeriesPage from './pages/SeriesPage';
 import BerlanggananPage from './pages/BerlanggananPage';
+import BlogPage from './pages/BlogPage';
 import type { Movie, Page } from './types';
 import { sampleMovie } from './constants';
 
@@ -35,6 +36,8 @@ const App: React.FC = () => {
         return <SeriesPage navigateTo={navigateTo} viewMovieDetails={viewMovieDetails} />;
       case 'berlangganan':
         return <BerlanggananPage navigateTo={navigateTo} />;
+      case 'blog':
+        return <BlogPage navigateTo={navigateTo} />;
       case 'home':
       default:
         return <HomePage navigateTo={navigateTo} viewMovieDetails={viewMovieDetails} />;

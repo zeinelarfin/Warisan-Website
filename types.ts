@@ -14,4 +14,4 @@ export interface Category {
   movies: Movie[];
 }
 
-export type Page = 'home' | 'login' | 'detail' | 'tentang' | 'series' | 'berlangganan';
+export type Page = 'home' | 'login' | 'detail' | 'tentang' | 'series' | 'berlangganan' | 'blog';

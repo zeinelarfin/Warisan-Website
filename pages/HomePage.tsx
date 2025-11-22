@@ -16,7 +16,7 @@ const HomePage: React.FC<HomePageProps> = ({ navigateTo, viewMovieDetails }) => 
     <div className="bg-black">
       <Header navigateTo={navigateTo} />
       <main>
-        <Hero />
+        <Hero navigateTo={navigateTo} />
         <div className="transform -translate-y-24">
           {categories.map((category) => (
             <MovieRow key={category.title} category={category} viewMovieDetails={viewMovieDetails} />
