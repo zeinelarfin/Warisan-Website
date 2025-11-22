@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -46,7 +47,7 @@ const ShareIcons = () => {
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    const text = "Menonton Warisan, Menyelami Nusantara. Cek artikel baru ini!";
+    const text = "OTT Warisan: Platform Streaming Budaya Nusantara. Cek artikel baru ini!";
     
     let shareUrl = '';
     switch (platform) {
@@ -107,7 +108,47 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
     window.scrollTo(0, 0);
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // SEO: Update Title and Meta Description dynamically
+    document.title = "OTT Warisan: Platform Streaming Budaya Nusantara untuk Generasi Digital";
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'OTT Warisan adalah platform streaming untuk menikmati budaya Indonesia secara modern melalui film dokumenter, arsip visual, dan cerita Nusantara.');
+
+    // SEO: Inject JSON-LD Schema
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "OTT Warisan: Platform Streaming Budaya Nusantara untuk Generasi Digital",
+      "description": "OTT Warisan adalah platform streaming untuk menikmati budaya Indonesia secara modern melalui film dokumenter, arsip visual, dan cerita Nusantara.",
+      "image": "https://picsum.photos/seed/borobudur/1920/1080",
+      "author": {
+        "@type": "Person",
+        "name": "Zeinel Arfin Sadiq"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Warisan OTT",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/logo.png" // Placeholder
+        }
+      },
+      "datePublished": new Date().toISOString().split('T')[0]
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
@@ -125,16 +166,16 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black z-10"></div>
         
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center pt-20">
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl text-center pt-20">
             <FadeInSection>
-                <span className="inline-block py-1 px-3 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] text-sm font-semibold tracking-wider mb-6 backdrop-blur-sm border border-[#D4AF37]/30">
-                    EDITORIAL WARISAN
+                <span className="inline-block py-1 px-3 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] text-sm font-semibold tracking-wider mb-6 backdrop-blur-sm border border-[#D4AF37]/30 uppercase">
+                    Editorial & Wawasan
                 </span>
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
-                    OTT Warisan Hadir: Cara Baru Menikmati Budaya Nusantara di Era Digital
+                    OTT Warisan: Platform Streaming Budaya Nusantara untuk Generasi Digital
                 </h1>
-                <p className="text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow-md">
-                    "Sebuah revolusi digital untuk mendekatkan kita kembali ke akar."
+                <p className="text-xl text-gray-200 italic max-w-3xl mx-auto drop-shadow-md">
+                    "Sebuah revolusi digital untuk mendekatkan kita kembali ke akar, menghubungkan masa lalu dengan masa depan."
                 </p>
             </FadeInSection>
         </div>
@@ -153,51 +194,51 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                     <h2 className="text-2xl md:text-3xl font-bold text-[#D4AF37]">
                         Menyelami Nusantara.
                     </h2>
+                    <p className="mt-4 text-gray-400 text-sm">
+                        *Baca juga: <a href="#" onClick={(e) => {e.preventDefault(); navigateTo('tentang');}} className="text-[#D4AF37] hover:underline">Tentang Visi Kami</a>
+                    </p>
                 </div>
             </FadeInSection>
 
             <div className="space-y-6 text-lg leading-relaxed">
                 <FadeInSection>
                     <p>
-                        Kalau dulu kita harus datang ke museum atau berburu buku sejarah hanya untuk mengenal budaya Indonesia, sekarang caranya sudah berubah. <span className="text-white font-semibold">OTT Warisan</span> hadir sebagai platform streaming yang mengajak kita mengenal tanah kelahiran sendiri lewat cara yang lebih dekat, modern, dan relevan dengan generasi digital.
+                        Kalau dulu kita harus datang ke museum atau berburu buku sejarah hanya untuk mengenal budaya Indonesia, sekarang caranya sudah berubah. <strong className="text-white">OTT Warisan</strong> hadir sebagai <strong className="text-white">platform streaming budaya Indonesia</strong> yang mengajak kita mengenal tanah kelahiran sendiri lewat cara yang lebih dekat, modern, dan relevan dengan generasi digital.
+                    </p>
+                    <p className="mt-4">
+                        Di Warisan, kamu bisa menikmati kisah-kisah budaya Nusantara lewat film dokumenter, foto cerita, arsip sejarah, seni tradisi, hingga profil tokoh daerah—semua dikemas visual menarik dengan tampilan modern.
                     </p>
                 </FadeInSection>
                 
                 {/* Illustration: Modern Digital Consumption */}
                 <FadeInSection delay={100}>
-                    <div className="my-8 relative group rounded-xl overflow-hidden shadow-lg shadow-yellow-900/10">
+                    <figure className="my-8 relative group rounded-xl overflow-hidden shadow-lg shadow-yellow-900/10">
                         <img 
                             src="https://picsum.photos/seed/digital-watching/800/400" 
-                            alt="Menonton di gadget" 
+                            alt="Generasi muda menonton streaming budaya Indonesia di tablet" 
                             className="w-full object-cover h-64 md:h-80 transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-100"
                         />
-                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                             Akses budaya di mana saja, kapan saja.
-                        </div>
-                    </div>
-                </FadeInSection>
-                
-                <FadeInSection delay={100}>
-                    <p>
-                        Di Warisan, kamu bisa menikmati kisah-kisah budaya Nusantara lewat film dokumenter, foto cerita, arsip sejarah, seni tradisi, hingga profil tokoh daerah—semua dikemas visual menarik seperti yang ditampilkan pada mockup resminya.
-                    </p>
+                        </figcaption>
+                    </figure>
                 </FadeInSection>
                 
                 <FadeInSection delay={200}>
                     <div className="bg-gray-900/50 rounded-xl p-6 my-8 shadow-lg shadow-yellow-900/5 border border-gray-800 hover:border-[#D4AF37]/30 transition-colors duration-300">
-                        <h3 className="text-white font-bold mb-4 text-xl">Cocok untuk kamu yang:</h3>
+                        <h3 className="text-white font-bold mb-4 text-xl">Platform ini cocok untuk kamu yang:</h3>
                         <ul className="space-y-3">
                             <li className="flex items-start">
                                 <span className="text-[#D4AF37] mr-3 mt-1 text-xl">➤</span>
-                                <span>Ingin belajar budaya tanpa terasa “belajar”</span>
+                                <span>Ingin belajar budaya tanpa terasa “berat” atau menggurui.</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-[#D4AF37] mr-3 mt-1 text-xl">➤</span>
-                                <span>Pengen nonton tontonan lokal yang punya nilai</span>
+                                <span>Mencari tontonan lokal yang memiliki nilai edukasi tinggi.</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-[#D4AF37] mr-3 mt-1 text-xl">➤</span>
-                                <span>Atau sekadar butuh hiburan yang bikin semakin cinta Indonesia</span>
+                                <span>Butuh hiburan yang membangkitkan rasa bangga terhadap Indonesia.</span>
                             </li>
                         </ul>
                     </div>
@@ -208,37 +249,37 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                 <FadeInSection>
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
                         <span className="bg-[#D4AF37] w-1 h-8 mr-4 rounded-sm"></span>
-                        Apa sih OTT Warisan itu?
+                        Apa Itu OTT Warisan?
                     </h2>
                     <p className="mb-6">
-                        Bayangkan <span className="italic text-white font-semibold">Netflix</span>, tapi isinya bukan drama Korea atau film Hollywood—melainkan:
+                        Bayangkan <span className="italic text-white font-semibold">Netflix</span>, tapi didedikasikan khusus untuk kekayaan Nusantara. Bukan drama Korea atau film Hollywood, melainkan konten otentik seperti:
                     </p>
                 </FadeInSection>
 
                 {/* Illustration: Traditional Culture */}
                 <FadeInSection delay={100}>
-                    <div className="my-6 relative group rounded-xl overflow-hidden shadow-lg shadow-yellow-900/10">
+                    <figure className="my-6 relative group rounded-xl overflow-hidden shadow-lg shadow-yellow-900/10">
                         <img 
                             src="https://picsum.photos/seed/traditional-dance/800/400" 
-                            alt="Kekayaan Budaya" 
+                            alt="Pertunjukan seni tari tradisional Indonesia dalam format sinematik" 
                             className="w-full object-cover h-64 md:h-80 transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-100"
                         />
-                         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                         <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                             Seni tradisi yang memukau mata dunia.
-                        </div>
-                    </div>
+                        </figcaption>
+                    </figure>
                 </FadeInSection>
 
                 <div className="grid gap-4 md:grid-cols-2 my-6">
                     {[
-                        "Dokumenter budaya Indonesia",
+                        "Dokumenter budaya & sejarah Indonesia",
                         "Perjalanan tradisi dari Sabang sampai Merauke",
-                        "Cerita orang-orang yang menjaga warisan bangsa",
-                        "Arsip visual dan foto sejarah yang jarang kita lihat",
-                        "Konten modern yang merayakan Indonesia dengan cara baru"
+                        "Kisah penjaga warisan bangsa",
+                        "Arsip visual & foto sejarah langka",
+                        "Konten modern perayaan identitas nasional"
                     ].map((item, i) => (
                         <FadeInSection key={i} delay={i * 100}>
-                            <div className="h-full bg-gray-900/50 p-4 rounded-lg border border-gray-800 hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-900/10 hover:-translate-y-1">
+                            <div className="h-full bg-gray-900/50 p-4 rounded-lg border border-gray-800 hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-900/10 hover:-translate-y-1 text-sm md:text-base font-medium">
                                 {item}
                             </div>
                         </FadeInSection>
@@ -247,9 +288,37 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                 
                 <FadeInSection>
                     <p>
-                        Semua bisa kamu tonton dari rumah, sekolah, kantor, atau bahkan warung kopi. Tinggal buka web atau aplikasi, dan kamu sudah masuk ke dunia baru bernama Nusantara versi digital.
+                        Semua konten ini dapat diakses dari rumah, sekolah, kantor, atau bahkan warung kopi. Cukup buka web atau aplikasi, dan kamu sudah masuk ke dunia baru bernama <span className="text-[#D4AF37]">Nusantara versi digital</span>. Lihat <a href="#" onClick={(e) => {e.preventDefault(); navigateTo('series');}} className="text-[#D4AF37] hover:underline font-bold">Katalog Lengkap Kami</a>.
                     </p>
                 </FadeInSection>
+
+                {/* NEW SECTION: Data & Fakta */}
+                <div className="py-6"><hr className="border-gray-800" /></div>
+
+                <FadeInSection>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                        <span className="bg-[#D4AF37] w-1 h-8 mr-4 rounded-sm"></span>
+                        Mengapa Digitalisasi Budaya Penting?
+                    </h2>
+                    <p className="mb-6">
+                        Pelestarian budaya kini harus beradaptasi dengan teknologi. Berdasarkan tren data digital:
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                        <div className="text-center p-6 bg-gray-900 rounded-lg border border-gray-800">
+                            <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-2">73%</div>
+                            <p className="text-sm text-gray-400">Generasi Z tertarik pada konten lokal yang dikemas modern.</p>
+                        </div>
+                        <div className="text-center p-6 bg-gray-900 rounded-lg border border-gray-800">
+                            <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-2">12K+</div>
+                            <p className="text-sm text-gray-400">Warisan budaya takbenda Indonesia yang perlu didokumentasikan.</p>
+                        </div>
+                        <div className="text-center p-6 bg-gray-900 rounded-lg border border-gray-800">
+                            <div className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-2">Top 5</div>
+                            <p className="text-sm text-gray-400">Indonesia memiliki keragaman budaya tertinggi di dunia (UNESCO).</p>
+                        </div>
+                    </div>
+                </FadeInSection>
+
 
                 <div className="py-6"><hr className="border-gray-800" /></div>
 
@@ -266,7 +335,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                             <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#D4AF37] text-black flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#D4AF37]/20 group-hover:scale-110 transition-transform duration-300">1</div>
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Dekat dengan budaya, tapi tetap relevan</h3>
-                                <p className="text-gray-400">Konten Warisan tidak “menggurui”. Ia bercerita—seperti teman yang mengajak ngobrol santai soal kampung halaman.</p>
+                                <p className="text-gray-400">Konten Warisan tidak “menggurui”. Ia bercerita—seperti teman yang mengajak ngobrol santai soal kampung halaman. Pendekatan ini membuat belajar sejarah menjadi menyenangkan.</p>
                             </div>
                         </div>
                     </FadeInSection>
@@ -276,7 +345,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                             <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#D4AF37] text-black flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#D4AF37]/20 group-hover:scale-110 transition-transform duration-300">2</div>
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Visualnya modern dan estetik</h3>
-                                <p className="text-gray-400">Kalau kamu lihat tampilannya, kamu akan sadar: Budaya Indonesia bisa tampil selera tinggi, sinematik, dan Instagrammable.</p>
+                                <p className="text-gray-400">Budaya Indonesia bisa tampil selera tinggi, sinematik, dan <em>Instagrammable</em>. Kami menggunakan standar produksi tinggi untuk memastikan setiap detail busana, tarian, dan arsitektur terlihat memukau.</p>
                             </div>
                         </div>
                     </FadeInSection>
@@ -286,7 +355,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                             <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#D4AF37] text-black flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#D4AF37]/20 group-hover:scale-110 transition-transform duration-300">3</div>
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Bukan sekadar hiburan</h3>
-                                <p className="text-gray-400">Menonton Warisan itu seperti liburan singkat: kamu belajar, kamu jalan-jalan, kamu mengenal negaramu sendiri—tanpa terasa berat.</p>
+                                <p className="text-gray-400">Menonton Warisan itu seperti liburan singkat: kamu belajar, kamu jalan-jalan, kamu mengenal negaramu sendiri—tanpa terasa berat. Ini adalah bentuk <strong className="text-white">edutainment</strong> yang sesungguhnya.</p>
                             </div>
                         </div>
                     </FadeInSection>
@@ -301,7 +370,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                         <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700 z-0">
                              <img 
                                 src="https://picsum.photos/seed/youth-genz/800/600" 
-                                alt="Generasi Muda" 
+                                alt="Anak muda Indonesia bangga dengan budayanya" 
                                 className="w-full h-full object-cover grayscale" 
                             />
                         </div>
@@ -309,19 +378,32 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
 
                         <div className="relative z-10">
                             <h2 className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-6">
-                                Dibangun untuk Semua Generasi
+                                Siapa Target Pengguna OTT Warisan?
                             </h2>
                             <p className="mb-8 text-lg text-white">
-                                Warisan cocok untuk penonton usia 13 sampai 40 tahun, mulai dari pelajar, mahasiswa, pekerja hingga orang-orang yang ingin terus terhubung dengan identitasnya.
+                                Warisan dirancang untuk penonton usia **13 sampai 40 tahun**, mulai dari pelajar, mahasiswa, pekerja, hingga siapa saja yang ingin terus terhubung dengan identitas nasionalnya.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 text-center">
-                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Kontennya tidak berjarak</div>
-                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Bahasanya ringan</div>
-                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Cerita dekat realita</div>
+                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Konten Inklusif</div>
+                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Bahasa Populer</div>
+                                <div className="bg-black/60 backdrop-blur-md p-4 rounded-lg border border-gray-700 text-sm font-medium text-white group-hover:border-[#D4AF37]/50 transition-colors">Relevan</div>
                             </div>
                             <p className="mb-10 italic text-gray-300 border-l-2 border-gray-500 pl-4">
-                                Bahkan untuk yang tadinya tidak terlalu “ke museum banget”, Warisan bisa jadi pintu awal yang bikin kamu mulai peduli dan bangga sama Indonesia.
+                                "Bahkan untuk yang tadinya tidak terlalu 'ke museum banget', Warisan bisa jadi pintu awal yang bikin kamu mulai peduli dan bangga sama Indonesia."
                             </p>
+
+                            {/* CTA for Subscription */}
+                            <div className="mb-10 text-center bg-black/40 backdrop-blur-md rounded-xl p-6 border border-gray-700/50">
+                                <p className="text-white text-lg mb-6 font-medium">
+                                    Jadilah bagian dari gerakan peduli warisan Nusantara. Dukungan Anda memastikan cerita-cerita ini terus hidup untuk generasi mendatang.
+                                </p>
+                                <button 
+                                    onClick={() => navigateTo('berlangganan')}
+                                    className="inline-block bg-[#D4AF37] text-black text-lg font-bold px-8 py-3 rounded-full hover:bg-[#b89a31] hover:scale-105 transition-all duration-300 shadow-lg shadow-yellow-500/20"
+                                >
+                                    Berlangganan Sekarang
+                                </button>
+                            </div>
                             
                             <div className="text-center pt-8 border-t border-gray-700/50">
                                 <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 tracking-tight">Menonton Warisan,</h3>
@@ -338,7 +420,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ navigateTo }) => {
                 {/* Social Share Section */}
                 <FadeInSection delay={200}>
                     <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-                         <h3 className="text-white font-medium text-lg mb-4">Bagikan Artikel Ini</h3>
+                         <h3 className="text-white font-medium text-lg mb-4">Bagikan Kabar Baik Ini</h3>
                          <ShareIcons />
                     </div>
                 </FadeInSection>
